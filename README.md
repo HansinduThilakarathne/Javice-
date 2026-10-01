@@ -78,7 +78,7 @@ The project is divided between two core engineers.
 ┌────────────────────────────────────────────────────────┐
 │                   J.A.R.V.I.S. MK-VII                 │
 ├───────────────────────────┬────────────────────────────┤
-│   MEMBER 1: MANUJA        │   MEMBER 2: CO-ENGINEER    │
+│   MEMBER 1: MANUJA        │   MEMBER 2: Lishani    │
 │   Core AI, Audio & Sec    │   UI, HUD & OS Engine      │
 ├───────────────────────────┼────────────────────────────┤
 │ • brain.py                │ • ui/index.html            │
