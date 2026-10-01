@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>J.A.R.V.I.S. MARK VII - Iron Man HUD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@400;500;600;700&family=Noto+Sans+Sinhala:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-cyan">
+  <!-- HUD Ambient Overlay & Grid Lines -->
+  <div class="hud-overlay">
+    <div class="hud-scanline"></div>
+    <div class="hud-vignette"></div>
+    <div class="hud-grid-bg"></div>
+  </div>
+
+  <!-- HUD Container -->
+  <div class="hud-container">
+    <!-- Desktop Floating Widget Top Drag Bar & Controls -->
+    <div class="widget-drag-bar pywebview-drag-region">
+      <div class="drag-handle-grip">
+        <span class="grip-line"></span>
+        <span class="grip-line"></span>
+        <span class="grip-line"></span>
+      </div>
+      <div class="widget-brand">
+        <span class="brand-core">J.A.R.V.I.S.</span>
+        <span class="brand-tag">MK-VII</span>
+      </div>
+      <div class="widget-status-badge" id="widget-status-badge">
+        <span class="pulse-dot"></span>
+        <span id="widget-status-text">ONLINE // MONITORING</span>
+      </div>
+      <div class="widget-controls no-drag">
+        <button class="win-btn win-btn-fs" title="Toggle Fullscreen (F11)" onclick="toggleFullScreen()">⛶</button>
+        <button class="win-btn win-btn-collapse" id="btn-toggle-compact" title="Toggle Compact / Expanded View" onclick="toggleWidgetMode()">−</button>
+        <button class="win-btn win-btn-close" title="Minimize / Hide" onclick="closeWidget()">×</button>
+      </div>
+    </div>
+
+    <!-- Top System Header (Standard Fullscreen Mode) -->
+    <header class="hud-header">
+      <div class="header-left">
+        <div class="reactor-mini-icon"></div>
+        <div class="title-group">
+          <h1 class="hud-title">J.A.R.V.I.S. <span class="version-tag">MARK VII</span></h1>
+          <div class="subtitle">TACTICAL NEURAL INTERFACE // PRIMARY USER: <span class="user-highlight">MANUJA</span></div>
+        </div>
+      </div>
+
+      <div class="header-center">
+        <div class="status-pill status-online" id="system-status-pill">
+          <span class="pulse-dot"></span>
+          <span id="system-status-text">SYSTEM SECURE // BIOMETRICS ACTIVE</span>
+        </div>
+        <button class="hud-fullscreen-btn" id="btn-fullscreen" onclick="toggleFullScreen()" title="Toggle Fullscreen (F11)">
+          <span class="fs-icon">⛶</span> FULLSCREEN
+        </button>
+        <div class="ai-badge">GEMINI 2.5 FLASH GROUNDED</div>
+      </div>
+
+      <div class="header-right">
+        <div class="time-display" id="hud-clock">00:00:00</div>
+        <div class="date-display" id="hud-date">STARK NETWORKS</div>
+      </div>
+    </header>
+
+    <!-- Main 3-Column Tactical HUD Layout -->
+    <main class="hud-body">
+      <!-- Left Column: Hardware Diagnostics -->
+      <aside class="hud-column hud-left-col">
+        <div class="hud-panel panel-telemetry">
+          <div class="panel-header">
+            <span class="panel-icon">⚙</span>
+            <h2>HARDWARE TELEMETRY</h2>
+            <span class="panel-tag">LIVE</span>
+          </div>
+
+          <!-- Gauge 1: CPU -->
+          <div class="metric-card" id="metric-cpu">
+            <div class="metric-top">
+              <span class="metric-label">CPU CORE LOAD</span>
+              <span class="metric-val" id="cpu-val">0%</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill" id="cpu-bar" style="width: 0%;"></div>
+            </div>
+            <div class="metric-sub" id="cpu-sub">Intel Core // Telemetry Polling</div>
+          </div>
+
+          <!-- Gauge 2: RAM -->
+          <div class="metric-card" id="metric-ram">
+            <div class="metric-top">
+              <span class="metric-label">NEURAL MEMORY (RAM)</span>
+              <span class="metric-val" id="ram-val">0%</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill" id="ram-bar" style="width: 0%;"></div>
+            </div>
+            <div class="metric-sub" id="ram-sub">0 GB / 0 GB Used</div>
+          </div>
+
+          <!-- Gauge 3: Battery -->
+          <div class="metric-card" id="metric-battery">
+            <div class="metric-top">
+              <span class="metric-label">ARC POWER / BATTERY</span>
+              <span class="metric-val" id="battery-val">100%</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill" id="battery-bar" style="width: 100%;"></div>
+            </div>
+            <div class="metric-sub" id="battery-sub">A/C Connected (Charging)</div>
+          </div>
+
+          <!-- Gauge 4: Network & Storage -->
+          <div class="metric-dual">
+            <div class="mini-metric">
+              <span class="mini-label">DISK (C:)</span>
+              <span class="mini-val" id="disk-val">0%</span>
+            </div>
+            <div class="mini-metric">
+              <span class="mini-label">NET TX/RX</span>
+              <span class="mini-val" id="net-val">0 / 0 MB</span>
+            </div>
+          </div>
+
+          <!-- Security Lock Status Indicator -->
+          <div class="security-card" id="security-badge-card">
+            <div class="sec-icon" id="sec-icon-status">🛡️</div>
+            <div class="sec-info">
+              <div class="sec-title" id="sec-user-title">ADMINISTRATOR: MANUJA</div>
+              <div class="sec-desc" id="sec-user-status">BIOMETRIC MATCH CONFIRMED</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- System Quick Action Controls -->
+        <div class="hud-panel panel-controls">
+          <div class="panel-header">
+            <span class="panel-icon">⚡</span>
+            <h2>TACTICAL OVERRIDE</h2>
+          </div>
+          <div class="control-grid">
+            <button class="hud-btn" id="btn-listen" onclick="triggerVoiceInput()">
+              <span class="btn-icon">🎙️</span>
+              <span>LISTEN NOW</span>
+            </button>
+            <button class="hud-btn" id="btn-screenshot" onclick="triggerScreenshot()">
+              <span class="btn-icon">📸</span>
+              <span>SCREENSHOT</span>
+            </button>
+            <button class="hud-btn" id="btn-lock" onclick="triggerLockPc()">
+              <span class="btn-icon">🔒</span>
+              <span>LOCK PC</span>
+            </button>
+            <button class="hud-btn" id="btn-screen-vision" onclick="triggerScreenAnalysis()">
+              <span class="btn-icon">👁️</span>
+              <span>SCREEN VISION</span>
+            </button>
+            <button class="hud-btn" id="btn-app-code" onclick="triggerLaunchApp('code')">
+              <span class="btn-icon">💻</span>
+              <span>VS CODE</span>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Center Column: 3D Holographic AI Talking Wireframe Face -->
+      <section class="hud-column hud-center-col">
+        <div class="center-core-wrapper">
+          <!-- Holographic Rings & Reticle -->
+          <div class="holo-ring outer-ring"></div>
+          <div class="holo-ring middle-ring"></div>
+          <div class="holo-ring inner-ring"></div>
+          <div class="compass-ticks"></div>
+
+          <!-- Three.js 3D Canvas Container -->
+          <div id="three-canvas-container" class="three-container"></div>
+
+          <!-- State Overlay Badge -->
+          <div class="core-state-badge" id="core-state-badge">
+            <span class="state-icon" id="state-icon">⚡</span>
+            <span class="state-text" id="state-text">IRON MAN MK-VII HUD // CORE READY</span>
+          </div>
+
+          <!-- Audio Waveform Visualizer -->
+          <div class="waveform-container" id="waveform">
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Sinhala Activity Stream & Terminal -->
+      <aside class="hud-column hud-right-col">
+        <div class="hud-panel panel-terminal">
+          <div class="panel-header">
+            <span class="panel-icon">📡</span>
+            <h2>ACTIVITY STREAM // සිංහල සන්නිවේදනය</h2>
+            <span class="panel-tag active-blink">TRANSMITTING</span>
+          </div>
+
+          <!-- Live Terminal Output List -->
+          <div class="terminal-body" id="terminal-body">
+            <div class="term-msg msg-system">
+              <span class="msg-time">[00:00:01]</span>
+              <span class="msg-sender">SYSTEM:</span>
+              <span class="msg-content">J.A.R.V.I.S. MARK VII මුලපිරීම සාර්ථකයි. පරිපාලක Manuja (සර්) වෙත සාදරයෙන් පිළිගනිමු.</span>
+            </div>
+            <div class="term-msg msg-ai">
+              <span class="msg-time">[00:00:02]</span>
+              <span class="msg-sender">J.A.R.V.I.S.:</span>
+              <span class="msg-content">මම ඔබේ සියලු විධාන සඳහා සූදානම්ව සිටිමි, සර්.</span>
+            </div>
+          </div>
+
+          <!-- Multi-Modal Vision & File Hub Dropzone -->
+          <div class="hud-dropzone" id="hud-file-dropzone" onclick="triggerFileInput()" title="Click or Drag & Drop File / Image (.jpg, .png, .pdf, .py, .txt, .json)">
+            <input type="file" id="hud-file-input" style="display:none;" accept=".jpg,.jpeg,.png,.pdf,.py,.txt,.json" onchange="handleFileSelected(event)" />
+            <div class="dropzone-inner">
+              <span class="dropzone-icon">📥</span>
+              <div class="dropzone-text">
+                <span class="dz-title">MULTI-MODAL FILE HUB</span>
+                <span class="dz-sub">Drop .jpg, .png, .pdf, .py, .txt, .json</span>
+              </div>
+              <span class="dz-badge">GEMINI VISION</span>
+            </div>
+          </div>
+
+          <!-- Interactive Text Command Input for Manuja -->
+          <div class="terminal-input-bar">
+            <input type="text" id="manu-text-input" placeholder="සර්ගේ විධානය මෙහි ලියන්න (හෝ කතා කරන්න)..." onkeypress="handleInputKey(event)" />
+            <button class="send-btn" onclick="submitTextInput()">EXECUTE</button>
+          </div>
+        </div>
+
+        <!-- Project Status / Diagnostics Subpanel -->
+        <div class="hud-panel panel-autonomous">
+          <div class="panel-header">
+            <span class="panel-icon">🛠️</span>
+            <h2>AUTONOMOUS SUITE</h2>
+          </div>
+          <div class="project-info-box">
+            <div class="proj-row">
+              <span class="p-label">CURRENT ASSIGNMENT:</span>
+              <span class="p-value" id="proj-assignment">READY // LISTENING</span>
+            </div>
+            <div class="proj-row">
+              <span class="p-label">VOICE ENGINE:</span>
+              <span class="p-value">EDGE-TTS (si-LK)</span>
+            </div>
+            <div class="proj-row">
+              <span class="p-label">SECURITY PROTOCOL:</span>
+              <span class="p-value highlight-cyan">BIOMETRIC ENFORCED</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- Bottom HUD Status Bar -->
+    <footer class="hud-footer">
+      <div class="footer-segment">
+        <span class="footer-lbl">CORE PROTOCOL:</span>
+        <span class="footer-val">MARK-VII.2026</span>
+      </div>
+      <div class="footer-segment">
+        <span class="footer-lbl">STT SYNTHESIS:</span>
+        <span class="footer-val">ACTIVE (si-LK)</span>
+      </div>
+      <div class="footer-segment">
+        <span class="footer-lbl">INTELLIGENCE:</span>
+        <span class="footer-val">GEMINI 2.5 FLASH GROUNDED</span>
+      </div>
+      <div class="footer-segment align-right">
+        <span class="footer-lbl">STARK ARCHITECTURE // SECURED FOR MANUJA</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Three.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
