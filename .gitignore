@@ -1,0 +1,53 @@
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Python byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Environment & Secret files (CRITICAL - DO NOT COMMIT)
+.env
+.env.*
+!.env.example
+
+# Runtime logs & audits (preserve folder via .gitkeep)
+logs/*.jsonl
+logs/*.log
+logs/*.txt
+!logs/.gitkeep
+JARVIS_MK7/logs/*.jsonl
+JARVIS_MK7/logs/*.log
+JARVIS_MK7/logs/*.txt
+!JARVIS_MK7/logs/.gitkeep
+
+# Screenshots & Vision captures (preserve folder via .gitkeep)
+screenshots/*.png
+screenshots/*.jpg
+screenshots/*.jpeg
+!screenshots/.gitkeep
+JARVIS_MK7/screenshots/*.png
+JARVIS_MK7/screenshots/*.jpg
+JARVIS_MK7/screenshots/*.jpeg
+!JARVIS_MK7/screenshots/.gitkeep
+
+# Temporary audio files
+*.mp3
+*.wav
+
+# Operating System & IDE artifacts
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# AI / DeepFace model cache downloads
+.deepface/
+.keras/

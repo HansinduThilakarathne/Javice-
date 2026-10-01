@@ -1,0 +1,31 @@
+# Virtual environments
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyc
+
+# Environment & Secret files (CRITICAL - DO NOT COMMIT)
+.env
+.env.*
+!.env.example
+
+# Runtime logs & screenshots (preserve directories via .gitkeep)
+logs/*.jsonl
+logs/*.log
+logs/*.txt
+!logs/.gitkeep
+screenshots/*.png
+screenshots/*.jpg
+screenshots/*.jpeg
+!screenshots/.gitkeep
+
+# Temporary audio files
+*.mp3
+*.wav
+
+# IDE files
+.vscode/
+.idea/
