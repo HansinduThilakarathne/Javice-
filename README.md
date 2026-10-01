@@ -1,4 +1,4 @@
-# J.A.R.V.I.S. MK-VII — Autonomous Desktop AI Companion
+# J.A.R.V.I.S. MK-VII - Autonomous Desktop AI Companion
 
 An advanced, real-time autonomous personal AI companion inspired by Iron Man, engineered exclusively for **Sir (Manuja)** on Windows.
 
@@ -78,7 +78,7 @@ The project is divided between two core engineers.
 ┌────────────────────────────────────────────────────────┐
 │                   J.A.R.V.I.S. MK-VII                 │
 ├───────────────────────────┬────────────────────────────┤
-│   MEMBER 1: MANUJA        │   MEMBER 2: Lishani    │
+│   MEMBER 1: Manuja        │   MEMBER 2: Lishani    │
 │   Core AI, Audio & Sec    │   UI, HUD & OS Engine      │
 ├───────────────────────────┼────────────────────────────┤
 │ • brain.py                │ • ui/index.html            │
@@ -99,7 +99,7 @@ Cognitive Core, Audio Pipelines, Biometrics, and System Configuration.
 
 ### Responsibilities
 
-#### Cognitive Engine — `brain.py`
+#### Cognitive Engine - `brain.py`
 
 - Set up Google Gemini 2.5 Flash using the `google-genai` SDK.
 - Implement multi-turn conversational session context.
@@ -108,7 +108,7 @@ Cognitive Core, Audio Pipelines, Biometrics, and System Configuration.
 - Configure the J.A.R.V.I.S. persona.
 - Address the administrator as **"Sir" / "සර්"**.
 
-#### Voice & Listening Pipeline — `voice_engine.py`
+#### Voice & Listening Pipeline - `voice_engine.py`
 
 - Configure `SpeechRecognition`.
 - Implement dynamic noise gating.
@@ -119,7 +119,7 @@ Cognitive Core, Audio Pipelines, Biometrics, and System Configuration.
 - Route audio through `pygame.mixer`.
 - Implement self-echo protection.
 
-#### Biometrics & Security — `security.py`, `config.py`
+#### Biometrics & Security - `security.py`, `config.py`
 
 - Implement startup facial verification.
 - Compare the user's face against `manuja.jpg`.
@@ -154,7 +154,7 @@ Responsibilities:
 - Create responsive HUD layouts.
 - Implement fullscreen mode using `F11`.
 
-#### Desktop Application & IPC Bridge — `app.py`
+#### Desktop Application & IPC Bridge - `app.py`
 
 - Configure `pywebview`.
 - Create frameless and semi-transparent windows.
@@ -163,7 +163,7 @@ Responsibilities:
 - Implement JavaScript ↔ Python communication.
 - Send transcripts and face states to the HUD.
 
-#### Deep OS Automation — `system_tools.py`
+#### Deep OS Automation - `system_tools.py`
 
 - Implement direct YouTube launching.
 - Implement software installation using `winget`.
@@ -516,7 +516,7 @@ run_jarvis.bat
 
 ## 👤 Project Team
 
-### Member 1 — Manuja
+### Member 1 - Manuja
 
 **Lead AI & Systems Architect**
 
@@ -528,7 +528,7 @@ Responsibilities:
 - Security
 - Configuration
 
-### Member 2 — Co-Engineer
+### Member 2 - Co-Engineer
 
 **Frontend & Automation Specialist**
 
