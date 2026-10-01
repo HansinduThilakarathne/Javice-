@@ -1,9 +1,6 @@
 # J.A.R.V.I.S. MK-VII - Autonomous Desktop AI Companion
 
 An advanced, real-time autonomous personal AI companion inspired by Iron Man, engineered exclusively for **Sir (Manuja)** on Windows.
-
-Powered by Google Gemini 2.5 Flash, Microsoft Edge TTS (Sinhala), OpenCV facial biometrics, Windows OS automation, and a Three.js-based 3D Holographic HUD.
-
 ---
 
 ## 🌟 Key Features
